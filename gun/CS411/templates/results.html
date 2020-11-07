@@ -1,0 +1,6 @@
+{{data}}
+
+
+{% for i in data %}
+    <div><P>{{ i.incident_id }} - {{ i.date }} - {{ i.address }} - {{ i.state }} - {{ i.city }} - {{ i.n_killed }} - {{ i.source_url }}</P></div>
+{% endfor %}
