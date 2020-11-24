@@ -15,53 +15,69 @@
       margin: 4px 2px;
       cursor: pointer;
     }
-
+​
     .button {background-color: #008CBA;} /* Blue */
     </style>
   </head>
   <body>
-
+​     <h2>{{ html }}</h2>
     <h1>Search</h1>
-    <form action="/CS411/search" method = "POST">
-      <fieldset>
-        <legend>Text input</legend>
-        <p>
-          <label>ID</label>
-          <input type = "text"
-                 name = "Incident_id"
-                 value = "NULL" />
-          <label>Address</label>
-          <input type = "text"
-                 name = "Address"
-                 value = "NULL" />
-                 <label>City</label>
-                 <input type = "text"
-                        name = "City"
-                        value = "NULL" />
-                 <label>State</label>
-                 <input type = "text"
-                        name = "State"
-                        value = "NULL" />
-                        <label>Date</label>
-                        <input type = "text"
-                               name = "Date"
-                               value = "NULL" />
-                        <label>Death</label>
-                        <input type = "text"
-                               name = "Deaths_count"
-                               value = "NULL" />
-                        <label>Report</label>
-                        <input type = "text"
-                               name = "Related_Reports"
-                               value = "NULL" />
-        </p >
-
-      </fieldset>
-    </form>
+  <form action = '' method="post">
+      <!-- Very Important csrf Token -->
+      {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+  
     <a href="/search">
-    <!-- <button class="button button"> -->
       <input type = "submit" value = "search">
-      <!-- Search -->
+
     </a>
+  </form>
+    <a href="/">
+      <!-- <button class="button button"> -->
+        <input type = "submit" value = "home">
+        <!-- Search -->
+    </a>
+
+
+    <table border="1" cellpadding ="30">
+      <thread>
+        <tr>
+          <th>Incident_id</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Date</th>
+          <th>Deaths_count</th>
+          <th>Related_Reports</th>
+        </tr>
+      </thread>
+      <tbody>
+        {% for obj in data %}
+          <tr>
+            <th>{{obj.0}}</th>
+            <th>{{obj.2}}</th>
+            <th>{{obj.4}}</th>
+            <th>{{obj.3}}</th>
+            <th>{{obj.1}}</th>
+            <th>{{obj.5}}</th>
+            <th>{{obj.6}}</th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
   </body>
 </html>
+
+<!-- 
+      <p>{{obj.0}}
+      {{obj.2}}
+      {{obj.4}}
+      {{obj.3}}
+      {{obj.1}}
+      {{obj.5}}
+      {{obj.6}}</p> -->
+<!-- <P>{{ i.incident_id }} - {{ i.date }} - {{ i.address }} - {{ i.state }} - {{ i.city }} - {{ i.n_killed }} - {{ i.source_url }}print 
+</P> -->

@@ -25,6 +25,7 @@ urlpatterns = [
     path('insert/',  views.insert,name = "insert"),
     path('delete/',  views.delete,name = "delete"),
     path('update/',  views.update,name = "update"),
+    path('regform/',  views.regform,name = "regform"),
 
     # url(r'^search/$', views.SearchPageView.as_view()), 
     # url(r'^insert/$', views.InsertPageView.as_view()), 

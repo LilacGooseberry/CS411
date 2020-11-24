@@ -22,46 +22,23 @@
   <body>
 
     <h1>Delete</h1>
-    <form action="/CS411/delete">
-      <fieldset>
-        <legend>Text input</legend>
-        <p>
-          <label>ID</label>
-          <input type = "text"
-                 name = "Incident_id"
-                 value = "NULL" />
-          <label>Address</label>
-          <input type = "text"
-                 name = "Address"
-                 value = "NULL" />
-                 <label>City</label>
-                 <input type = "text"
-                        name = "City"
-                        value = "NULL" />
-                 <label>State</label>
-                 <input type = "text"
-                        name = "State"
-                        value = "NULL" />
-                        <label>Date</label>
-                        <input type = "text"
-                               name = "Date"
-                               value = "NULL" />
-                        <label>Death</label>
-                        <input type = "text"
-                               name = "Deaths_count"
-                               value = "NULL" />
-                        <label>Report</label>
-                        <input type = "text"
-                               name = "Related_Reports"
-                               value = "NULL" />
-        </p >
-
-      </fieldset>
-    </form>
-    <a href="notice/">
-    <button class="button button">
-      Delete
-    </button>
+    <form action = '' method="post">
+      <!-- Very Important csrf Token -->
+      {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    
+    <a href="/delete">
+    <input type = "submit" value = "delete">
+    
     </a>
+    </form>
+    <a href="/">
+    <!-- <button class="button button"> -->
+      <input type = "submit" value = "home">
+      <!-- Search -->
+    </a>
+
   </body>
 </html>
