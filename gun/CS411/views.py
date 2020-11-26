@@ -43,7 +43,7 @@ def map(request):
     m = folium.Map([Latitude, Longitude], zoom_start=10)
     for i in range(len(results)):
         popupString = "Address: "+str(results[i][3])+"<br> Date: "+str(results[i][4])+"<br> Killed: "+str(results[i][5])+"<br> source_url: "+str(results[i][6])+"<br> Participant Name: "+str(results[i][7])
-        folium.Circle(radius = 100, location=[results[i][1], results[i][2]], popup=popupString).add_to(m)    
+        folium.Circle(radius = 40, location=[results[i][1], results[i][2]], popup=popupString).add_to(m)    
     m=m._repr_html_()
     context = {'map': m,'form': form}
     

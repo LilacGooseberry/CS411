@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import djongo
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,11 +82,17 @@ DATABASES = {
         'OPTIONS': {
             'read_default_file': '/etc/mysql/my.cnf',
         },
+    },
+    'product_db': {
+      'ENGINE' : 'djongo',
+      "CLIENT" : {
+        "name" : 'DarkDB',
+        "host" : 'mongodb+srv://cluster0.2q94y.gcp.mongodb.net/DarkDB',
+        "username" : 'peiming2',
+        "password" : 'MAGA2020',
+        "authMechanism": "SCRAM-SHA-1",
+      }
     }
-    # 'product_db' : {
-    #   'ENGINE' : 'django_mongodb_engine',
-    #   'NAME' : 'mangodb'
-    # }
 }
 
 
