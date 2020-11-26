@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  </head>
+
+<body>
+    <h1>Map</h1>
+    <div id='map' width="100%" style='height:400px'></div>
+    <script>
+     mapboxgl.accessToken = {{ mapbox_access_token }};
+     var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v10'
+     });
+    </script>
+   </body>
+ </html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {{map.header.render|safe}}
+</head>
+<body>
+    <form action = '' method="post">
+        <!-- Very Important csrf Token -->
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+
+        <a href="/map">
+        <input type = "submit" value = "map search">
+
+        </a>
+    </form>
+  <div><h1>Here comes my folium map:</h1></div>
+
+  {{map|safe}}
+
+  <script>
+    {{map.script.render|safe}}
+  </script>
+</body>
+</html>

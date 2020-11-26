@@ -1,0 +1,30 @@
+CREATE TABLE Location(incident_id int(255) NOT NULL PRIMARY KEY, latitude float, longtitude float, location_description varchar(255));
+LOAD DATA LOCAL INFILE '~/Downloads/Location.csv' into table Location fields terminated by ',' enclosed by '"' lines terminated by '\r\n' IGNORE 1 ROWS;
+
+CREATE TABLE Violence(     incident_id int(255) NOT NULL PRIMARY KEY,     date varchar(255),     address varchar(255),     state varchar(255),     city varchar(255),     n_killed int(255),     source_url varchar(255) );
+LOAD DATA LOCAL INFILE '~/Downloads/shooting_case.csv' into table Violence fields terminated by ',' enclosed by '"' lines terminated by '\r\n' IGNORE 1 ROWS;
+
+CREATE TABLE Participants(incident_id int(255) NOT NULL PRIMARY KEY, participant_gender varchar(255), participant_name varchar(255), participant_age varchar(255));
+LOAD DATA LOCAL INFILE '~/Downloads/Participants.csv' into table Participants fields terminated by ',' enclosed by '"' lines terminated by '\r\n' IGNORE 1 ROWS;
+
+
+
+# def insert(req):
+#     ID = req.POST.get("Incident_id")
+#     print(ID)
+#     Incident_id = 10034234
+#     address = 'A'
+#     city = 'Bad'
+#     state = 'C'
+#     with connection.cursor() as cursor:
+            
+#     cursor.execute("INSERT INTO Violence values(%s,NULL, NULL, NULL, %s,NULL,NULL)",(Incident_id,city))
+#     return render(req,'insert.html')
+
+            with connection.cursor() as cursor:
+                sql = "SELECT * FROM Violence \
+                    WHERE city = '"+str(City)+"' \
+                    AND incident_id = '"+str(Incident_id)+ "' \
+                    AND address = '"+str(Address)+ "' \
+                    AND state = '"+str(State)+"'\
+                    AND n_killed = '"+str(Death)+"'"

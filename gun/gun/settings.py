@@ -82,6 +82,10 @@ DATABASES = {
             'read_default_file': '/etc/mysql/my.cnf',
         },
     }
+    # 'product_db' : {
+    #   'ENGINE' : 'django_mongodb_engine',
+    #   'NAME' : 'mangodb'
+    # }
 }
 
 
