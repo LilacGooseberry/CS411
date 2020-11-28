@@ -3,42 +3,48 @@
   <head>
     <title>Search.html</title>
     <meta charset = "UTF-8" />
-    <style>
-    .button {
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-    }
-
-    .button {background-color: #008CBA;} /* Blue */
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
   </head>
   <body>
-
-    <h1>Delete</h1>
-    <form action = '' method="post">
-      <!-- Very Important csrf Token -->
-      {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/">GUN</a> Violence Database</h1>
+        <ul>
+        <nav id="nav">
+          <li style="white-space: :nowrap;"><a href="/">home</a></li>
+        </nav>
+      </ul>
+    </header>
+    <!-- Main -->
+    <section id="main" class="container medium">
+      <header>
+        <h2>Delete</h2>
+      </header>
+      <div class="box">
+      <form action = '' method="post">
+        <div>
+        <!-- Very Important csrf Token -->
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+          </table>
+        </div>
+      </form>
+      </div>
+    </section>
+    
     
     <a href="/delete">
     <input type = "submit" value = "delete">
-    
     </a>
-    </form>
-    <a href="/">
-    <!-- <button class="button button"> -->
-      <input type = "submit" value = "home">
-      <!-- Search -->
-    </a>
+   
+    <!-- Scripts -->
+    <script type="text/javascript" href="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/browser.min.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/breakpoints.min.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/js/util.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/js/main.js' %}"></script>
 
   </body>
 </html>
