@@ -71,7 +71,7 @@ def map(request):
         folium.Circle(radius = 40, location=[results[i][1], results[i][2]], popup=popupString).add_to(m)
         
     np_resultc = np.array(results)
-    id_array = np_resultc[:,0]
+    
     
 
 
