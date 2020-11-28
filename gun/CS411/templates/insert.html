@@ -3,24 +3,21 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Gun Violence Database</title>
-        <style>
-        .button {
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-        }
-
-        .button {background-color: #008CBA;} /* Blue */
-        </style>
-    </head>
-    <body>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />        
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+      </head>
+      <body>
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="^$">GUN</a> Violence Database</h1>
+            <ul>
+            <nav id="nav">
+              <li style="white-space: :nowrap;"><a href="^$">home</a></li>
+            </nav>
+          </ul>
+        </header>
+      <title>Gun Violence Database</title>
 
       <h1>Insert</h1>
       <form action = '' method="post">
@@ -30,11 +27,12 @@
         {{ form.as_table }}
       </table>
       
-      <a href="/insert">
+      
+    </form>
+    <a href="/insert">
       <input type = "submit" value = "insert">
 
       </a>
-    </form>
       <a href="/">
       <!-- <button class="button button"> -->
         <input type = "submit" value = "home">

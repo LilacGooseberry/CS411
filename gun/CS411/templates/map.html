@@ -27,8 +27,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
     {{map.header.render|safe}}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
 <body>
+    <!-- Header -->
+    <header id="header">
+      <h1><a href="index.html">GUN</a> Violence Database</h1>
+    </header>
+    
     <form action = '' method="post">
         <!-- Very Important csrf Token -->
         {% csrf_token %}
