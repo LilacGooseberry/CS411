@@ -1,44 +1,51 @@
-<!-- howdy/templates/index.html -->
-<!-- howdy/templates/index.html -->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Gun Violence Database</title>
-        <style>
-        .button {
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-        }
-
-        .button {background-color: #008CBA;} /* Blue */
-        </style>
-    </head>
-    <body>
-
-      <h1>Insert</h1>
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <title>Insert.html</title>
+    <meta charset = "UTF-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/">GUN</a> Violence Database</h1>
+        <ul>
+        <nav id="nav">
+          <li style="white-space: :nowrap;"><a href="/">home</a></li>
+        </nav>
+      </ul>
+    </header>
+    <!-- Main -->
+    <section id="main" class="container medium">
+      <header>
+        <h2>Insert</h2>
+      </header>
+      <div class="box">
       <form action = '' method="post">
+        <div>
         <!-- Very Important csrf Token -->
-        {% csrf_token %}
-      <table>
-        {{ form.as_table }}
-      </table>
-      
-      <a href="/insert">
-      <input type = "submit" value = "insert">
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+          </table>
+        </div>
+        <a href="/insert">
+          <input type = "submit" value = "insert">
+        </a>
+      </form>
+      </div>
+    </section>
+    
+    
+ 
+   
+    <!-- Scripts -->
+    <script type="text/javascript" href="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/browser.min.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/breakpoints.min.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/js/util.js' %}"></script>
+    <script type="text/javascript" href="{% static 'js/js/main.js' %}"></script>
 
-      </a>
-    </form>
-      <a href="/">
-      <!-- <button class="button button"> -->
-        <input type = "submit" value = "home">
-        <!-- Search -->
-      </a>
-    </body>
+  </body>
 </html>

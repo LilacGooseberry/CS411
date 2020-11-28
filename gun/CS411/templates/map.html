@@ -23,12 +23,23 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    {{map.header.render|safe}}
-</head>
-<body>
+  <head>
+    <title>Insert.html</title>
+    <meta charset = "UTF-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/">GUN</a> Violence Database</h1>
+        <ul>
+        <nav id="nav">
+          <li style="white-space: :nowrap;"><a href="/">home</a></li>
+        </nav>
+      </ul>
+    </header>
+    <section id="main" class="container medium">
     <form action = '' method="post">
         <!-- Very Important csrf Token -->
         {% csrf_token %}
@@ -41,17 +52,15 @@
 
         </a>
     </form>
-     <a href="/">
-      <!-- <button class="button button"> -->
-        <input type = "submit" value = "home">
-        <!-- Search -->
-      </a>
-  <div><h1>The map:</h1></div>
+  </section>
+  <section class="box">
+  <div><h2>The map:</h2></div>
 
   {{map|safe}}
 
   <script>
     {{map.script.render|safe}}
   </script>
+  </section>
 </body>
 </html>
