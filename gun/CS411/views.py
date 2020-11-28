@@ -7,10 +7,16 @@ from django.http.response import HttpResponse
 from django.views import View
 from . import forms
 import folium
-
+from mongoengine import *
+import pymongo
+import os
+from datetime import datetime
+import numpy as np
 # Map
 class FoliumView(TemplateView):
     template_name = "map.html"
+class Violence(DynamicDocument):
+    pass
 
 def map(request):  
     # pass the data
@@ -19,6 +25,12 @@ def map(request):
     Latitude = 40
     Longitude = -80
     results = []
+    MONGODB_HOST = 'mongodb://127.0.0.1:27017'
+    connect(db='CS411', host=MONGODB_HOST, 
+        read_preference=pymongo.ReadPreference.PRIMARY_PREFERRED)
+
+    
+
     if request.method == 'POST':
         form = forms.GetFrom2(request.POST)
         html = 'we have recieved this form again'
@@ -37,13 +49,35 @@ def map(request):
         with connection.cursor() as cursor:
             cursor.execute(sql)
             results = cursor.fetchall()
+            
+
             print(len(results))
+    np_resultc = np.array(results)
+    id_array = []
+    for i in range(len(results)):
+        id_array.append(int(results[i][0]))
+
+    # for i in range(len(results)):
+    v = Violence.objects(incident_id__in = id_array)
+    source = []
+    for i in v:
+        source.append(i.soiurce_url)
+        
 
     # draw the map
     m = folium.Map([Latitude, Longitude], zoom_start=10)
     for i in range(len(results)):
-        popupString = "Address: "+str(results[i][3])+"<br> Date: "+str(results[i][4])+"<br> Killed: "+str(results[i][5])+"<br> source_url: "+str(results[i][6])+"<br> Participant Name: "+str(results[i][7])
-        folium.Circle(radius = 40, location=[results[i][1], results[i][2]], popup=popupString).add_to(m)    
+        popupString = "Address: "+str(results[i][3])+"<br> Date: "+str(results[i][4])+"<br> Killed: "+str(results[i][5])+"<br> source_url from mangoDB: "+str(source[i])+"<br> Participant Name: "+str(results[i][7])
+        folium.Circle(radius = 40, location=[results[i][1], results[i][2]], popup=popupString).add_to(m)
+        
+    np_resultc = np.array(results)
+    id_array = np_resultc[:,0]
+    
+
+
+    folium.Circle(radius = 100, color='#ED553B', location=[Latitude, Longitude], tooltip= str(len(np_resultc))+" accidents around from 2012 to 2018.").add_to(m)
+    # np_resultc = np.array(results)
+
     m=m._repr_html_()
     context = {'map': m,'form': form}
     
