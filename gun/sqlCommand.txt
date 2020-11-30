@@ -6,7 +6,8 @@ LOAD DATA LOCAL INFILE '~/Downloads/shooting_case.csv' into table Violence field
 
 CREATE TABLE Participants(incident_id int(255) NOT NULL PRIMARY KEY, participant_gender varchar(255), participant_name varchar(255), participant_age varchar(255));
 LOAD DATA LOCAL INFILE '~/Downloads/Participants.csv' into table Participants fields terminated by ',' enclosed by '"' lines terminated by '\r\n' IGNORE 1 ROWS;
-
+mongod --port 27017 --dbpath /home/ke/mymongo/mongodb/
+ sudo chown -R $USER /home/ke/mymongo/mongodb
 mongoimport -d CS411 -c violence --type CSV --file /home/ke/Downloads/shooting_case.csv --fields "incident_id,date,address,state,city,n_killed,soiurce_url
 
 
@@ -37,11 +38,15 @@ mongoimport -d CS411 -c violence --type CSV --file /home/ke/Downloads/shooting_c
 # mongodb quries
 db.gun.aggregate(
             {$match:
-                    { Date: {
-                        &gte: 2015-01-01,
-                        $lte: 2018-12-30
-                            }
-                    },
+                    {&and: [
+                        { Incident_id : },v
+                        { Date: {
+                            &gte: 2015-01-01,
+                            $lte: 2018-12-30
+                                }
+                        }
+                            ]
+                    }
             },
             count: {$sum: 1}
             }

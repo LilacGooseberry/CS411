@@ -24,7 +24,7 @@ def map(request):
     form = forms.GetFrom2()
     Latitude = 40
     Longitude = -80
-    results = []
+    results2 = []
     MONGODB_HOST = 'mongodb://127.0.0.1:27017'
     connect(db='CS411', host=MONGODB_HOST, 
         read_preference=pymongo.ReadPreference.PRIMARY_PREFERRED)
@@ -40,6 +40,14 @@ def map(request):
             Latitude = form.cleaned_data['latitude']
             Longitude = form.cleaned_data['longitude']
 
+        sql2 = "select V.city, SUM(V.n_killed)\
+              from Location L Natural Join Violence V Natural Join Participants P\
+                  where L.latitude >= "+str(Latitude-0.03)+" AND L.latitude <= "+str(Latitude+0.03)+" AND L.longtitude >= "+str(Longitude-0.03)+" AND L.longtitude <= "+str(Longitude+0.03)+"\
+                      GROUP BY V.city "
+        with connection.cursor() as cursor:
+            cursor.execute(sql2)
+            results2 = cursor.fetchall()
+        print(results2)
 
         sql = "select L.incident_id, L.latitude, L.longtitude, V.address, V.date, V.n_killed,V.source_url,P.participant_name\
               from Location L Natural Join Violence V Natural Join Participants P\
@@ -75,7 +83,7 @@ def map(request):
     
 
 
-    folium.Circle(radius = 100, color='#ED553B', location=[Latitude, Longitude], tooltip= str(len(np_resultc))+" accidents around from 2012 to 2018.").add_to(m)
+    folium.Circle(radius = 100, color='#ED553B', location=[Latitude, Longitude], tooltip= str(len(np_resultc))+" accidents around from 2012 to 2018.<br>"+str(results2[0][1])+" Death in total").add_to(m)
     # np_resultc = np.array(results)
 
     m=m._repr_html_()
